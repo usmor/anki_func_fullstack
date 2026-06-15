@@ -1,0 +1,6 @@
+кот, cat
+собака, dog
+дом, house
+птица, bird
+школа, school
+ручка, pen
