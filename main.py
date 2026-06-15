@@ -70,8 +70,8 @@ def ask_and_check(word: str, correct: str) -> Tuple[bool, bool, float]:
     if user_translation.upper().strip() == STOP_WORD:
         return (True, False, 0.0)
     else:
-        return (False, 
-                user_translation.lower().strip() == correct.lower(), 
+        return (False,
+                user_translation.lower().strip() == correct.lower(),
                 answer_time)
 
 
@@ -132,7 +132,8 @@ def train_until_mistake(words: Dict[str, str]) -> None:
         print('Словарь пуст.')
         return
 
-    print(f'Режим: Игра до первой ошибки! Чтобы выйти вручную, введите {STOP_WORD}')
+    print('Режим: Игра до первой ошибки! '
+          f'Чтобы выйти вручную, введите {STOP_WORD}')
 
     score = 0
     total_time = 0.0
