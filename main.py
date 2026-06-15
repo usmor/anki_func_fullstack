@@ -58,7 +58,7 @@ def ask_and_check(word: str, correct: str) -> Tuple[bool, bool, float]:
     Возвращает:
         Tuple[bool, bool, float]: Кортеж из трёх элементов:
             - need_to_exit (bool): True, если пользователь ввёл STOP_WORD
-            - is_correct (bool): True, если перевод правильный (актуально только при need_to_exit=False)
+            - is_correct (bool): True, если перевод правильный
             - answer_time (float): Время, затраченное на ответ в секундах
     """
     print(f'Ваше слово: {word}')
@@ -70,7 +70,9 @@ def ask_and_check(word: str, correct: str) -> Tuple[bool, bool, float]:
     if user_translation.upper().strip() == STOP_WORD:
         return (True, False, 0.0)
     else:
-        return (False, user_translation.lower().strip() == correct.lower(), answer_time)
+        return (False, 
+                user_translation.lower().strip() == correct.lower(), 
+                answer_time)
 
 
 def start_game(words: Dict[str, str]) -> None:
@@ -97,7 +99,8 @@ def start_game(words: Dict[str, str]) -> None:
 
     while True:
         word, correct_translation = random.choice(list(words.items()))
-        need_to_exit, is_correct, answer_time = ask_and_check(word, correct_translation)
+        need_to_exit, is_correct, answer_time = ask_and_check(
+            word, correct_translation)
         total_time += answer_time
         if need_to_exit:
             print_statistics(score, total_time)
@@ -105,9 +108,11 @@ def start_game(words: Dict[str, str]) -> None:
         else:
             if is_correct:
                 score += 1
-                print(f'Верно! Всего очков: {score} (ответ за {answer_time:.2f} секунд)')
+                print(f'Верно! Всего очков: {score} '
+                      f'(ответ за {answer_time:.2f} секунд)')
             else:
-                print(f'Неправильно, правильный ответ: {correct_translation} (Время на ответ: {answer_time:.2f} секунд)')
+                print(f'Неправильно, правильный ответ: {correct_translation} '
+                      f'(Время на ответ: {answer_time:.2f} секунд)')
 
 
 def train_until_mistake(words: Dict[str, str]) -> None:
@@ -134,7 +139,8 @@ def train_until_mistake(words: Dict[str, str]) -> None:
 
     while True:
         word, correct_translation = random.choice(list(words.items()))
-        need_to_exit, is_correct, answer_time = ask_and_check(word, correct_translation)
+        need_to_exit, is_correct, answer_time = ask_and_check(
+            word, correct_translation)
         total_time += answer_time
         if need_to_exit:
             print('Выход из режима по запросу пользователя.')
@@ -143,7 +149,8 @@ def train_until_mistake(words: Dict[str, str]) -> None:
 
         if is_correct:
             score += 1
-            print(f'Верно! Всего очков: {score} (ответ за {answer_time:.2f} секунд)')
+            print(f'Верно! Всего очков: {score} '
+                  f'(ответ за {answer_time:.2f} секунд)')
         else:
             print(f'Ошибка! Неверно. Правильный ответ: {correct_translation}')
             print_statistics(score, total_time)
@@ -192,7 +199,8 @@ def show_all_words(words: Dict[str, str]) -> None:
     if not words:
         print()
         return
-    formatted = [f'{word} - {translation}' for word, translation in words.items()]
+    formatted = [f'{word} - {translation}'
+                 for word, translation in words.items()]
     print('; '.join(formatted))
 
 
